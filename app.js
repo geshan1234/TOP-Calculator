@@ -2,6 +2,10 @@ const numpad = document.querySelector('.numpad')
 const numOp = document.querySelector('.numOp')
 const operators = document.querySelector('.operators')
 const clear = document.querySelector('.clear')
+const equal = document.querySelector('.equal')
+let number1 = '';
+let number2 = '';
+let opNumber = '';
 
 for (let i = 0; i < 10; i++) {
   const button = document.createElement('button')
@@ -53,15 +57,26 @@ for (let i = 0; i < 2;i++ ){
 const numButtons = numpad.querySelectorAll('.numbers')
 numButtons.forEach(numButton => {
   numButton.addEventListener('click', (e) => {
-    if (numOp.textContent == 0 && e.target.textContent != 0){
-      numOp.textContent = ''
-      numOp.textContent += (e.target.textContent);}
-    else if (numOp.textContent != 0){
-      numOp.textContent += (e.target.textContent);}
-      console.log(e.target.textContent)
+    if (opNumber == ''){
+      if (numOp.textContent == 0 && e.target.textContent != 0){
+        numOp.textContent = ''
+        numOp.textContent += (e.target.textContent);
+        console.log(e.target.textContent)
+      }
+      else if (numOp.textContent != 0){
+        numOp.textContent += (e.target.textContent);
+        console.log(e.target.textContent)
+      }
     }
-  )}
-)
+    else {
+      numOp.textContent += (e.target.textContent);
+      number2 = parseInt(numOp.textContent)    
+      console.log(e.target.textContent) 
+    } 
+    
+    
+  })
+})
 
 const clearButtons = clear.querySelectorAll('.clearBtns')
 clearButtons.forEach(button => {
@@ -77,6 +92,39 @@ clearButtons.forEach(button => {
 }
 )
 
+const operatorButtons = operators.querySelectorAll('.operator')
+operatorButtons.forEach((operatorButton) => {
+  operatorButton.addEventListener('click', (e) => {
+    number1 = parseInt(numOp.textContent); 
+    numOp.textContent = '';
+    opNumber = e.target.id;
+    console.log(e.target.id)   
+  })
+})
+
+equal.addEventListener('click', () => {
+  console.log("equal")
+  number2 = parseInt(numOp.textContent)
+  console.log(number1)
+  console.log(number2)
+  if (number1 !== '' && number2 !== ''){
+    switch(opNumber){
+      case 'operator0':
+        numOp.textContent = number1 + number2;
+        break;
+      case 'operator1':
+        numOp.textContent = number1 - number2;
+        break;
+      case 'operator2':
+        numOp.textContent = number1 * number2;
+        break;
+      case 'operator3':
+        numOp.textContent = number1 / number2;
+        break;
+    }
+  }
+  else numOp.textContent = 'ERROR'
+}) 
 
 
 
