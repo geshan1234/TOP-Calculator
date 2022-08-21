@@ -7,12 +7,19 @@ let number1 = '';
 let number2 = '';
 let opNumber = '';
 
-for (let i = 0; i < 10; i++) {
-  const button = document.createElement('button')
+for (let i = 1; i < 10; i++) {
+  let button = document.createElement('button')
   button.setAttribute('id', `number${i}`)
   button.setAttribute('class', 'numbers')
   button.textContent = i
-  numpad.append(button) 
+  numpad.append(button)
+  if (i === 9){
+    button = document.createElement('button')
+    button.setAttribute('id', 'number0')
+    button.setAttribute('class', 'numbers')
+    button.textContent = 0
+    numpad.append(button)
+  }
 }
 
 for (let i = 0; i < 4; i++) {
